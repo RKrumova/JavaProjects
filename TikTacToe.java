@@ -1,4 +1,9 @@
 //package tictactoe;
+/**This project is supposed to be a Tik-Tac-Toe game
+It is not finished yet, but hopefully soon it will be. 
+At it's current state it is not working correctly
+Stage implementation 3, with error
+*/
 import java.util.Scanner;
 import java.util.Arrays;
 public class TikTacToe {
