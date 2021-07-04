@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.Arrays;
+/**Fefinatly not finished
+*/
 public class CinemaRoomsManagment {
 
     public static void main(String[] args) {
