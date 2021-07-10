@@ -1,6 +1,6 @@
 //package cinema;
 import java.util.Scanner;
-import java.util.Arrays;
+//import java.util.Arrays;
 //Five phase
 public class Cinema {
     public static int rows;
@@ -15,25 +15,19 @@ public class Cinema {
         createGrid();
         int option = 5; //random number so it does scream mistake
         do{
-            System.out.println("\n1. Show the seats\n2. Buy a ticket"
-                    + "\n3.Statistics\n0. Exit");
+            System.out.println("""
+                    
+                    1. Show the seats
+                    2. Buy a ticket
+                    3.Statistics
+                    0. Exit""");
             option = scanner.nextInt();
             switch (option) {
-                case 0:
-                    exit();
-                    break;
-                case 1:
-                    cinemaGrid(rows, seatsAtRow);
-                    break;
-                case 2:
-                    buyTicket(cinemaSeat);
-                    break;
-                case 3:
-                    statistics(soldTickets, rows, seatsAtRow, currentIncome);
-                    break;
-                default:
-                    System.out.println("Try agains");
-                    break;
+                case 0 -> exit();
+                case 1 -> cinemaGrid(rows, seatsAtRow);
+                case 2 -> buyTicket(cinemaSeat);
+                case 3 -> statistics(soldTickets, rows, seatsAtRow, currentIncome);
+                default -> System.out.println("Try agains");
             }
         }while (option != 0);
     }
@@ -51,7 +45,6 @@ public class Cinema {
                     cinemaSeat[a][b] = 'S';
                 }
             }
-            newRoom = false;
             newRoom = false;
         }
     }
@@ -75,44 +68,49 @@ public class Cinema {
         System.out.println("\nEnter a row number: ");
         int buyInRow = scanner.nextInt() - 1;
         System.out.println("Enter a seat number in that row:");
-        int buySeatInRow = scanner.nextInt() - 1;
-        if(cinemaSeat[buyInRow][buySeatInRow] != 'B') {
-            cinemaSeat[buyInRow][buySeatInRow] = 'B';
-            if( rows * seatsAtRow >= 60 ) {
-                if (rows % 2 == 0) {
-                    if (rows / 2 > buyInRow) {
-                        //first half
-                        ticket = 10;
+        try {
+            int buySeatInRow = scanner.nextInt() - 1;
+            if (cinemaSeat[buyInRow][buySeatInRow] != 'B' && (buyInRow <= rows)) {
+                cinemaSeat[buyInRow][buySeatInRow] = 'B';
+                if (rows * seatsAtRow >= 60) {
+                    if (rows % 2 == 0) {
+                        if (rows / 2 > buyInRow) {
+                            //first half
+                            ticket = 10;
+                        } else {
+                            //second half
+                            ticket = 8;
+                        }
                     } else {
-                        //second half
-                        ticket = 8;
+                        // if its uneven number 1,3....9, 23...etc
+                        if ((rows - 1) / 2 > buyInRow) {
+                            //first half
+                            ticket = 10;
+                        } else {
+                            //second half
+                            ticket = 8;
+                        }
                     }
                 } else {
-                    // if its uneven number 1,3....9, 23...etc
-                    if ((rows - 1) / 2 > buyInRow) {
-                        //first half
-                        ticket = 10;
-                    } else {
-                        //second half
-                        ticket = 8;
-                    }
+                    ticket = 10;
                 }
+                System.out.println("Ticket price: $" + ticket);
+                soldTickets++;
+                currentIncome += ticket;
             } else {
-                ticket = 10;
+                System.out.println("That ticket has already been purchased!\n");
             }
-            System.out.println("Ticket price: $" + ticket);
-            soldTickets++;
-            currentIncome += ticket;
-        } else {
-            System.out.println("That ticket has already been purchased!\n");
+        } catch (Exception ArrayIndexOutOfBoundsException) {
+            System.out.println("Wrong input!\n");
         }
     }
     //calculate the statistics
     public static void statistics(int soldTickets, int rows, int seatsAtRow, int currentIncome){
         //number purchased tickets
         System.out.println("Number of purchased tickets: " + soldTickets);
-        double dPercentage = (soldTickets * 100 / (rows * seatsAtRow));
-        System.out.println("Percentage: " +  + "%");
+        double percentNotFinal = ((double) soldTickets * 100) / ((double) rows * (double) seatsAtRow);
+        String percent = String.format("%.2g%n", percentNotFinal);
+        System.out.println("Percentage: " + percent + "%");
         System.out.println("Current income: $" + currentIncome);
         System.out.println("Total income: $" + totalIncomeFunction(rows, seatsAtRow));
     }
