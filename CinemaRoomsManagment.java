@@ -1,13 +1,14 @@
 //package cinema;
 import java.util.Scanner;
-//import java.util.Arrays;
-//Five phase
+import java.util.Arrays;
+//Five phase 
+/** I have a simple error that I cant even figure out
+*/
 public class Cinema {
     public static int rows;
     public static int seatsAtRow;
     public static int soldTickets = 0;
     public static int currentIncome = 0;
-
     public static char[][]cinemaSeat ;
     public static boolean newRoom = true;
     public static Scanner scanner = new Scanner(System.in);
@@ -27,7 +28,7 @@ public class Cinema {
                 case 1 -> cinemaGrid(rows, seatsAtRow);
                 case 2 -> buyTicket(cinemaSeat);
                 case 3 -> statistics(soldTickets, rows, seatsAtRow, currentIncome);
-                default -> System.out.println("Try agains");
+                default -> System.out.println("Wrong input!\n");
             }
         }while (option != 0);
     }
@@ -128,6 +129,7 @@ public class Cinema {
         return totalIncome;
     }
     public static void exit(){
-        System.exit(0);
+        return;
     }
-}//Favourite flower the rose;
+}
+//Favourite flower the rose;
