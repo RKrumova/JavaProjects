@@ -1,9 +1,7 @@
-//package cinema;
 import java.util.Scanner;
 import java.util.Arrays;
-//Five phase 
-/** I have a simple error that I cant even figure out
-*/
+//Five phase
+//I have a problem with a line in test 6
 public class Cinema {
     public static int rows;
     public static int seatsAtRow;
@@ -100,6 +98,7 @@ public class Cinema {
                 currentIncome += ticket;
             } else {
                 System.out.println("That ticket has already been purchased!\n");
+                buyTicket(cinemaSeat);
             }
         } catch (Exception ArrayIndexOutOfBoundsException) {
             System.out.println("Wrong input!\n");
