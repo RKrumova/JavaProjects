@@ -1,7 +1,7 @@
+package cinema;
 import java.util.Scanner;
-import java.util.Arrays;
+
 //Five phase
-//I have a problem with a line in test 6
 public class Cinema {
     public static int rows;
     public static int seatsAtRow;
@@ -109,7 +109,7 @@ public class Cinema {
         //number purchased tickets
         System.out.println("Number of purchased tickets: " + soldTickets);
         double percentNotFinal = ((double) soldTickets * 100) / ((double) rows * (double) seatsAtRow);
-        String percent = String.format("%.2g%n", percentNotFinal);
+        String percent = String.format("%.3g%n", percentNotFinal);
         System.out.println("Percentage: " + percent + "%");
         System.out.println("Current income: $" + currentIncome);
         System.out.println("Total income: $" + totalIncomeFunction(rows, seatsAtRow));
