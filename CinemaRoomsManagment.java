@@ -1,7 +1,6 @@
 package cinema;
 import java.util.Scanner;
 
-//Five phase
 public class Cinema {
     public static int rows;
     public static int seatsAtRow;
@@ -132,3 +131,4 @@ public class Cinema {
     }
 }
 //Favourite flower the rose;
+//Five phase finnised with unknown error that does show everytime but only in test six
