@@ -1,14 +1,42 @@
-//package numbers;
+package numbers;
+import java.util.Arrays;
 import java.util.Scanner;
-public class Main {
+public class AmazingNumbers {
     public static final Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        System.out.println("Welcome to Amazing Numbers!\n" +
-                "\nSupported requests:\n" +
-                "- enter a natural number to know its properties;" +
-                "\n- enter 0 to exit.");
+        String supportedRequest = ("\nSupported requests:\n" +
+                "- enter a natural number to know its properties;\n" +
+                "- enter two natural numbers to obtain the properties of the list:\n" +
+                "  * the first parameter represents a starting number;\n" +
+                "  * the second parameters show how many consecutive numbers are to be processed;\n" +
+                "- separate the parameters with one space;\n" +
+                "- enter 0 to exit.");
+        System.out.println("Welcome to Amazing Numbers!\n" + supportedRequest);
         System.out.println("\nEnter a request:");
         long a = scanner.nextLong();
+        while ( a != 0) {
+            if (scanner.hasNextLong() && a != 0) {
+                int times = scanner.nextInt(); // times
+                if( !scanner.hasNextInt()) {
+                    checks(a);
+                } else {
+                    for(int i = 1; i <=  times; i++) {
+                        checks(a);
+                        a += 1;
+                    }
+                }
+            } else if(a == 0) {
+                System.out.println("Goodbye!");
+            } else {
+                System.out.println(supportedRequest);
+            }
+        }
+        if (a == 0) {
+            System.out.println("Goodbye!");
+            return;
+        }
+    }
+    public static void checks(long a) {
         while ( a != 0) {
             if (a > 0) { //all naturel and not negative
                 System.out.println("Properties of " + a);
@@ -22,9 +50,6 @@ public class Main {
             }
             System.out.print("\nEnter a request:");
             a = scanner.nextLong();
-        }
-        if( a == 0) {
-            System.out.println("Goodbye!");
         }
     }
     public static boolean evenCheck(long a) {
@@ -87,5 +112,24 @@ public class Main {
             return false;
         }
     }
+    public static boolean gapful(long number) {
+        long firstDigit = number;
+        while(firstDigit >= 10) {
+            firstDigit = firstDigit /10;
+        }
+        int lastDigit = (int) (number % 10);
+        int length = String.valueOf(number).length();
+        if( String.valueOf(number).length() > 2 ) {
+            if( number % (firstDigit * 10 + lastDigit * 1) == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        //check if it has more than tree digits
 
+    }
 }
+// I like this project it teach me stuff
