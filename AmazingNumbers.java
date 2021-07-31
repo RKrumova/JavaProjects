@@ -1,7 +1,13 @@
 package numbers;
-import java.util.Arrays;
 import java.util.Scanner;
-public class AmazingNumbers {
+public class Main {
+    public static boolean even ;
+    public static boolean odd;
+    public static boolean buzz;
+    public static boolean duck;
+    public static boolean palindrome;
+    public static boolean gapful;
+
     public static final Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         String supportedRequest = ("\nSupported requests:\n" +
@@ -20,9 +26,10 @@ public class AmazingNumbers {
                 if( !scanner.hasNextInt()) {
                     checks(a);
                 } else {
-                    for(int i = 1; i <=  times; i++) {
-                        checks(a);
-                        a += 1;
+                    if(times > 0) {
+                        doubleChecks(a, times);
+                    } else {
+                        System.out.println("\nThe second parameter should be a natural number.");
                     }
                 }
             } else if(a == 0) {
@@ -52,22 +59,43 @@ public class AmazingNumbers {
             a = scanner.nextLong();
         }
     }
+    public static void doubleChecks(long a, long times) {
+        if (a > 0 && times > 0) {
+            for (int i = 1; i <= times; i++) {
+                System.out.println(inLineChecks(a));
+                System.out.println();
+                a += 1;
+            }
+        } else {
+            System.out.println("The second parameter should be a natural number.\n");
+        }
+    }
+    public static String inLineChecks(long a) {
+        return (a + "is" + (buzzCheck(a) ? "buzz" : "")
+                + (duckCheck(a) ? "duck " : "")
+                + (palindromicCheck(a) ? "palindromic " : "")
+                + (gapfulCheck(a) ? "gapful " : "")
+                + (evenCheck(a) ? "even " : "")
+                + (oddCheck(a) ? "odd " : ""));
+    }
     public static boolean evenCheck(long a) {
         if( a % 2 == 0) {
-            return true;
+            even = true;
         } else {
-            return false;
+            even = false;
         }
+        return even;
     }
     public static boolean oddCheck(long a) {
         if( a % 2 != 0) {
-            return true;
+            odd = true;
         } else {
-            return false;
+            odd = false;
         }
+        return odd;
     }
     public static boolean buzzCheck(long a) {
-        boolean buzz = false;
+        buzz = false;
         String reason;
         if( a % 10 == 7 && a % 7 != 0) {
             reason = a + " is ends with 7";
@@ -91,10 +119,11 @@ public class AmazingNumbers {
     }
     public static boolean duckCheck(long a) {
         if(String.valueOf(a).contains("0")){
-            return true;
+            duck = true;
         } else {
-            return false;
+            duck = false;
         }
+        return duck;
     }
     public static boolean palindromicCheck(long a) {
         long copyNumber = a;
@@ -103,16 +132,17 @@ public class AmazingNumbers {
             currentDigit = copyNumber % 10; //takes remainder
             reversedNumber = (reversedNumber * 10) + currentDigit;
             copyNumber = copyNumber / 10; // making new number
-            //I dont fucking get it
+            //I don't fucking get it
         } while (copyNumber != 0);
         //And now we fucking check
         if(a == reversedNumber) {
-            return true;
+            palindrome = true;
         } else {
-            return false;
+            palindrome = false;
         }
+        return palindrome;
     }
-    public static boolean gapful(long number) {
+    public static boolean gapfulCheck(long number) {
         long firstDigit = number;
         while(firstDigit >= 10) {
             firstDigit = firstDigit /10;
@@ -121,15 +151,14 @@ public class AmazingNumbers {
         int length = String.valueOf(number).length();
         if( String.valueOf(number).length() > 2 ) {
             if( number % (firstDigit * 10 + lastDigit * 1) == 0) {
-                return true;
+                gapful = true;
             } else {
-                return false;
+                gapful = false;
             }
         } else {
-            return false;
+            gapful = false;
         }
-        //check if it has more than tree digits
-
+        return gapful;
     }
 }
 // I like this project it teach me stuff
