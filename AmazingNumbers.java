@@ -1,6 +1,5 @@
-package numbers;
 import java.util.Scanner;
-public class Main {
+public class AmazingNumbers {
     public static boolean even ;
     public static boolean odd;
     public static boolean buzz;
@@ -8,22 +7,41 @@ public class Main {
     public static boolean palindrome;
     public static boolean gapful;
 
+    public static String supportedRequest = ("\nSupported requests:\n" +
+            "- enter a natural number to know its properties;\n" +
+            "- enter two natural numbers to obtain the properties of the list:\n" +
+            "  * the first parameter represents a starting number;\n" +
+            "  * the second parameters show how many consecutive numbers are to be processed;\n" +
+            "- separate the parameters with one space;\n" +
+            "- enter 0 to exit.");
     public static final Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        String supportedRequest = ("\nSupported requests:\n" +
-                "- enter a natural number to know its properties;\n" +
-                "- enter two natural numbers to obtain the properties of the list:\n" +
-                "  * the first parameter represents a starting number;\n" +
-                "  * the second parameters show how many consecutive numbers are to be processed;\n" +
-                "- separate the parameters with one space;\n" +
-                "- enter 0 to exit.");
+
         System.out.println("Welcome to Amazing Numbers!\n" + supportedRequest);
+        //
+        long a ;
+        int times;
+        //Format input
         System.out.println("\nEnter a request:");
-        long a = scanner.nextLong();
+        String input = scanner.nextLine();
+        if(input.contains(" ")){
+            String[] numbers = input.split(" ");
+            a =  Long.parseLong(numbers[0]);
+            times = Integer.parseInt(numbers[1]);
+        } else {
+            try {
+                a = Long.parseLong(input);
+            } catch (NumberFormatException e) {
+                a = -1;
+            }
+        }
+        fun(a, times);
+    }
+    public static void fun(long a, int times) { // its the main function but I didnt want it yet there
         while ( a != 0) {
-            if (scanner.hasNextLong() && a != 0) {
-                int times = scanner.nextInt(); // times
-                if( !scanner.hasNextInt()) {
+            if (a > 0) {
+                /*//from here
+                if( times != null ) {
                     checks(a);
                 } else {
                     if(times > 0) {
@@ -32,6 +50,8 @@ public class Main {
                         System.out.println("\nThe second parameter should be a natural number.");
                     }
                 }
+                //to here
+                */
             } else if(a == 0) {
                 System.out.println("Goodbye!");
             } else {
@@ -60,24 +80,24 @@ public class Main {
         }
     }
     public static void doubleChecks(long a, long times) {
-        if (a > 0 && times > 0) {
+        if (times > 0) {
             for (int i = 1; i <= times; i++) {
                 System.out.println(inLineChecks(a));
                 System.out.println();
                 a += 1;
             }
-        } else {
-            System.out.println("The second parameter should be a natural number.\n");
+
         }
     }
     public static String inLineChecks(long a) {
-        return (a + "is" + (buzzCheck(a) ? "buzz" : "")
+        return (a + " is " + (buzzCheck(a) ? "buzz " : "")
                 + (duckCheck(a) ? "duck " : "")
                 + (palindromicCheck(a) ? "palindromic " : "")
                 + (gapfulCheck(a) ? "gapful " : "")
                 + (evenCheck(a) ? "even " : "")
                 + (oddCheck(a) ? "odd " : ""));
     }
+
     public static boolean evenCheck(long a) {
         if( a % 2 == 0) {
             even = true;
@@ -161,4 +181,3 @@ public class Main {
         return gapful;
     }
 }
-// I like this project it teach me stuff
