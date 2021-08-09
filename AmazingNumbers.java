@@ -1,5 +1,6 @@
+package numbers;
 import java.util.Scanner;
-public class AmazingNumbers {
+public class Main {
     public static boolean even ;
     public static boolean odd;
     public static boolean buzz;
@@ -35,23 +36,14 @@ public class AmazingNumbers {
                 a = -1;
             }
         }
-        fun(a, times);
-    }
-    public static void fun(long a, int times) { // its the main function but I didnt want it yet there
+        //Work
         while ( a != 0) {
             if (a > 0) {
-                /*//from here
-                if( times != null ) {
+                try {
+                    doubleChecks(a, times);
+                } catch(NullPointerException e){
                     checks(a);
-                } else {
-                    if(times > 0) {
-                        doubleChecks(a, times);
-                    } else {
-                        System.out.println("\nThe second parameter should be a natural number.");
-                    }
                 }
-                //to here
-                */
             } else if(a == 0) {
                 System.out.println("Goodbye!");
             } else {
