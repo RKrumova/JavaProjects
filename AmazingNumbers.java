@@ -7,7 +7,8 @@ public class Main {
     public static boolean duck;
     public static boolean palindrome;
     public static boolean gapful;
-
+    public static boolean moreThanOne = false;
+    public static int times;
     public static String supportedRequest = ("\nSupported requests:\n" +
             "- enter a natural number to know its properties;\n" +
             "- enter two natural numbers to obtain the properties of the list:\n" +
@@ -20,8 +21,10 @@ public class Main {
 
         System.out.println("Welcome to Amazing Numbers!\n" + supportedRequest);
         //
-        long a ;
-        int times;
+        long a = 0;
+        userInput(a, times);
+    }
+    public static void userInput(long a, int times) {
         //Format input
         System.out.println("\nEnter a request:");
         String input = scanner.nextLine();
@@ -29,56 +32,75 @@ public class Main {
             String[] numbers = input.split(" ");
             a =  Long.parseLong(numbers[0]);
             times = Integer.parseInt(numbers[1]);
+            moreThanOne = true;
         } else {
             try {
                 a = Long.parseLong(input);
+
             } catch (NumberFormatException e) {
                 a = -1;
             }
         }
-        //Work
+        if(a<0) {
+            System.out.println("The first parameter should be a natural number or zero."); //error message
+        }
+            fun(a, times);
+    }
+    public static void fun(long a, int times) { // its the main function but I didnt want it yet there
         while ( a != 0) {
-            if (a > 0) {
-                try {
-                    doubleChecks(a, times);
-                } catch(NullPointerException e){
-                    checks(a);
-                }
+            if (moreThanOne != true && a != 0 && a > 0) {
+                checks(a);
             } else if(a == 0) {
                 System.out.println("Goodbye!");
+            } else if (moreThanOne == true && a != 0 && a > 0) {
+                if(times > 0) {
+                    doubleChecks(a, times);
+                } else {
+                    System.out.println("\nThe second parameter should be a natural number.");
+                }
             } else {
                 System.out.println(supportedRequest);
+                userInput(a, times);
             }
+            userInput(a, times);
         }
+        zeroCase(a);
+        minusCase(a);
+    }
+
+    public static void checks(long a) {
+        if (a > 0) { //all naturel and not negative
+            System.out.println("Properties of " + a);
+            System.out.println("\teven: " + evenCheck(a));
+            System.out.println("\todd: " + oddCheck(a));
+            System.out.println("\tbuzz: " + buzzCheck(a));
+            System.out.println("\tduck: " + duckCheck(a));
+            System.out.println("\tpalindromic: " + palindromicCheck(a));
+            System.out.println("\tgapful: "+gapfulCheck(a));
+        } else if (a == 0) {
+            zeroCase(a);
+        } else if(a<0) {
+            System.out.println("The first parameter should be a natural number or zero."); //error message
+        }
+    }
+    public static void zeroCase(long a) {
         if (a == 0) {
             System.out.println("Goodbye!");
-            return;
+            System.exit(0);
         }
     }
-    public static void checks(long a) {
-        while ( a != 0) {
-            if (a > 0) { //all naturel and not negative
-                System.out.println("Properties of " + a);
-                System.out.println("\teven: " + evenCheck(a));
-                System.out.println("\todd: " + oddCheck(a));
-                System.out.println("\tbuzz: " + buzzCheck(a));
-                System.out.println("\tduck: " + duckCheck(a));
-                System.out.println("palindromic: " + palindromicCheck(a));
-            } else {
-                System.out.println("The first parameter should be a natural number or zero."); //error message
-            }
-            System.out.print("\nEnter a request:");
-            a = scanner.nextLong();
-        }
+    public static void minusCase(long a) {
+
     }
+
     public static void doubleChecks(long a, long times) {
-        if (times > 0) {
-            for (int i = 1; i <= times; i++) {
+        int i = 1;
+        if (times > 0 && times >= i) {
+            for (; i <= times; i++) {
                 System.out.println(inLineChecks(a));
                 System.out.println();
-                a += 1;
+                a++;
             }
-
         }
     }
     public static String inLineChecks(long a) {
